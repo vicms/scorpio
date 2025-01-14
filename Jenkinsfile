@@ -2,17 +2,16 @@
 
 pipeline {
 
-  agent any
+  agent {
+    label 'maven'
+  }
 
   stages {
     stage('Build') {
       steps {
         echo 'Building..'
-
-	
-          sh 'mvn clean package'
         
-        // Add steps here
+        sh 'mvn clean package'
       }
     }
     stage('Create Container Image') {
@@ -21,8 +20,9 @@ pipeline {
         
         script {
 
-          openshift.withCluster() { 
-  openshift.withProject("cloudquestarch-dev") {
+         
+openshift.withCluster() { 
+  openshift.withProject("<your_project_name>") {
   
     def buildConfigExists = openshift.selector("bc", "codelikethewind").exists() 
     
@@ -32,6 +32,8 @@ pipeline {
     
     openshift.selector("bc", "codelikethewind").startBuild("--from-file=target/simple-servlet-0.0.1-SNAPSHOT.war", "--follow") } }
 
+
+
         }
       }
     }
@@ -40,8 +42,9 @@ pipeline {
         echo 'Deploying....'
         script {
 
+          
           openshift.withCluster() { 
-  openshift.withProject("cloudquestarch-dev") { 
+  openshift.withProject("<your_project_name") { 
     def deployment = openshift.selector("dc", "codelikethewind") 
     
     if(!deployment.exists()){ 
@@ -55,8 +58,11 @@ pipeline {
     } 
   } 
 }
+
+
+
         }
       }
     }
   }
-} 
+}
