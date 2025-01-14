@@ -1,0 +1,75 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewBuild
+  resourceVersion: '118728045'
+  name: scorpio
+  uid: 390aa7eb-703a-4da7-bcf1-8e25465e5437
+  creationTimestamp: '2025-01-07T00:51:19Z'
+  generation: 2
+  managedFields:
+    - manager: oc
+      operation: Update
+      apiVersion: build.openshift.io/v1
+      time: '2025-01-07T00:51:19Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:openshift.io/generated-by': {}
+          'f:labels':
+            .: {}
+            'f:build': {}
+        'f:spec':
+          'f:output':
+            'f:to': {}
+          'f:runPolicy': {}
+          'f:source':
+            'f:binary': {}
+            'f:type': {}
+          'f:strategy':
+            'f:sourceStrategy':
+              .: {}
+              'f:from': {}
+            'f:type': {}
+          'f:triggers': {}
+    - manager: openshift-apiserver
+      operation: Update
+      apiVersion: build.openshift.io/v1
+      time: '2025-01-07T00:51:34Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          'f:lastVersion': {}
+  namespace: cloudquestarch-dev
+  labels:
+    build: scorpio
+spec:
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'scorpio:latest'
+  resources: {}
+  successfulBuildsHistoryLimit: 5
+  failedBuildsHistoryLimit: 5
+  strategy:
+    type: JenkinsPipeline
+    jenkinsPipelineStrategy:
+      jenkinsfilePath: Jenkinsfile
+  postCommit: {}
+  source:
+    type: Binary
+    binary: {}
+  triggers:
+    - type: GitHub
+      github:
+        secret: 9V_1wzM5vH72PJ8FJjcS
+    - type: Generic
+      generic:
+        secret: f8tm7qChiJNNtPO0Eitj
+  runPolicy: Serial
+status:
+  lastVersion: 1
