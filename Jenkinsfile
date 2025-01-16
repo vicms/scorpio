@@ -2,7 +2,11 @@
 
 pipeline {
 
-agent  any
+agent {
+    node {
+      label 'maven' 
+    }
+  }  
 
   stages {
     stage('Build') {
