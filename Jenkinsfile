@@ -2,14 +2,18 @@
 def mvnHome = tool name: 'maven-3.8.6', type: 'maven'
 pipeline {
 
-agent any
+agent {
+    node {
+      label 'maven' 
+    }
+  }
 
   stages {
     stage('Build') {
       steps {
         echo 'Building..'
 	        
-          sh "${mvnHome}/bin/mvn clean package"        
+             sh 'mvn clean package'   
 
       }
     }
