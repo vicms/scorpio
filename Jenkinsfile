@@ -10,12 +10,13 @@ agent {
 
   stages {
     stage('Build') {
+      node {
       steps {
         echo 'Building..'
 	        
              sh 'mvn clean package'   
 
-      }
+      } }
     }
     stage('Create Container Image') {
       steps {
