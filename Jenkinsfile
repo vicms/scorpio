@@ -1,22 +1,18 @@
 #! /usr/bin/env groovy
-def mvnHome = tool name: 'maven-3.8.6', type: 'maven'
+
 pipeline {
 
-agent {
-    node {
-      label 'maven' 
-    }
-  }
+agent  any
 
   stages {
     stage('Build') {
-      node {
+      
       steps {
         echo 'Building..'
 	        
              sh 'mvn clean package'   
 
-      } }
+      } 
     }
     stage('Create Container Image') {
       steps {
