@@ -8,9 +8,9 @@ pipeline {
     stage('Build') {
       steps {
         echo 'Building..'
-	def mvnHome = tool name: 'maven-3.8.6', type: 'maven'
-                    sh "${mvnHome}/bin/mvn clean package"        
-        #sh 'mvn clean package'
+	        def mvnHome = tool name: 'maven-3.8.6', type: 'maven'
+          sh "${mvnHome}/bin/mvn clean package"        
+
       }
     }
     stage('Create Container Image') {
