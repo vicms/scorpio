@@ -3,13 +3,17 @@
 pipeline {
 
  agent any  
+  tools { 
+      maven 'MAVEN_HOME' 
+      jdk 'JAVA_HOME' 
+    }
 
   stages {
     stage('Build') {
       steps {
         echo 'Building..'
 	        def mvnHome = tool name: 'maven-3.8.6', type: 'maven'
-          sh "${mvnHome}/bin/mvn clean package"        
+          sh '${mvnHome}/bin/mvn clean package'        
 
       }
     }
